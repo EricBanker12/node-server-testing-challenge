@@ -2,13 +2,13 @@ const db = require('../data/db')
 
 const usersDB = require('./usersModel')
 
-
+beforeEach(() => db('users').truncate())
 
 describe('usersModel', () => {
 
     describe('find', () => {
 
-        beforeEach(() => db('users').truncate())
+        // beforeEach(() => db('users').truncate())
 
         test('should resolve to an array', () => {
             return usersDB.find()
@@ -45,7 +45,7 @@ describe('usersModel', () => {
 
     describe('add', () => {
 
-        beforeEach(() => db('users').truncate())
+        // beforeEach(() => db('users').truncate())
 
         test('should resolve to the added user', () => {
             return usersDB.add({username: 'testing'})
@@ -59,6 +59,46 @@ describe('usersModel', () => {
                 .then(resp => {
                     expect(resp.id).toBeDefined()
                 })
+        })
+
+    })
+
+    describe('del', () => {
+
+        // beforeEach(() => db('users').truncate())
+
+        test('should delete a user', async () => {
+            const [id] = await db('users').insert({username: 'testing'}, 'id')
+
+            let users = await db('users')
+
+            expect(users.length).toBe(1)
+
+            usersDB.del(id)
+
+            users = await db('users')
+
+            expect(users.length).toBe(0)
+        })
+
+        test('should delete a user with given id', async () => {
+            const [id] = await db('users').insert({username: 'testing'}, 'id')
+            
+            await db('users').insert({username: 'testing 2'})
+
+            let users = await db('users')
+
+            expect(users.length).toBe(2)
+
+            usersDB.del(id)
+
+            users = await db('users')
+
+            expect(users.length).toBe(1)
+
+            const deleted = await db('users').where({id}).first()
+
+            expect(deleted).toBe(undefined)
         })
 
     })
