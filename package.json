@@ -4,7 +4,9 @@
   "description": "Node Server Testing Challenge",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watch",
+    "initDevelopment": "knex migrate:latest",
+    "initTesting": "cross-env DB_ENV=testing knex migrate:latest",
+    "test": "cross-env DB_ENV=testing jest --watch",
     "server": "nodemon index.js",
     "start": "node index.js"
   },
