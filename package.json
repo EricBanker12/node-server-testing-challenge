@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "initDevelopment": "knex migrate:latest",
-    "initTesting": "cross-env DB_ENV=testing knex migrate:latest",
-    "test": "cross-env DB_ENV=testing jest --watch",
+    "initTesting": "cross-env NODE_ENV=testing knex migrate:latest",
+    "test": "cross-env NODE_ENV=testing jest --watch",
     "server": "nodemon index.js",
     "start": "node index.js"
   },
