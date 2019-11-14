@@ -4,7 +4,11 @@
   "description": "Node Server Testing Challenge",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watch"
+    "initDevelopment": "knex migrate:latest",
+    "initTesting": "cross-env NODE_ENV=testing knex migrate:latest",
+    "test": "cross-env NODE_ENV=testing jest --watch",
+    "server": "nodemon index.js",
+    "start": "node index.js"
   },
   "jest": {
     "testEnvironment": "node"
@@ -21,10 +25,16 @@
   },
   "homepage": "https://github.com/LambdaSchool/node-server-testing#readme",
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "knex": "^0.20.2",
+    "sqlite3": "^4.1.0"
   }
 }
