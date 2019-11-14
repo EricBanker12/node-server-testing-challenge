@@ -19,7 +19,7 @@ describe('/API', () => {
         test('should receive an array', () => {
             return request(server).get('/api/users')
                 .then(resp => {
-                    expect(Array.isArray(resp.data)).toBe(true)
+                    expect(Array.isArray(resp.body)).toBe(true)
                 })
         })
     })

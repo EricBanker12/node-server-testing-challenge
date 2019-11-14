@@ -10,5 +10,8 @@ const server = express()
 // server.use(express.json())
 
 // routes/routers
+server.get('/api/users', (req, res) => {
+    res.json([])
+})
 
 module.exports = server
