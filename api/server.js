@@ -5,9 +5,9 @@ const cors = require('cors')
 const server = express()
 
 // middleware
-server.use(helmet())
-server.use(cors())
-server.use(express.json())
+// server.use(helmet())
+// server.use(cors())
+// server.use(express.json())
 
 // routes/routers
 
