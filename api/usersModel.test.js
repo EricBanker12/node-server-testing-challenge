@@ -74,7 +74,7 @@ describe('usersModel', () => {
 
             expect(users.length).toBe(1)
 
-            usersDB.del(id)
+            await usersDB.del(id)
 
             users = await db('users')
 
@@ -90,7 +90,7 @@ describe('usersModel', () => {
 
             expect(users.length).toBe(2)
 
-            usersDB.del(id)
+            await usersDB.del(id)
 
             users = await db('users')
 

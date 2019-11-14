@@ -3,6 +3,7 @@ const db = require('../data/db')
 module.exports = {
     find,
     add,
+    del,
 }
 
 function find(filter) {
@@ -13,4 +14,8 @@ function find(filter) {
 function add(user) {
     return db('users').insert(user, '*')
         .then(([id]) => find({id}))
+}
+
+function del(id) {
+    return db('users').where({id}).del()
 }
