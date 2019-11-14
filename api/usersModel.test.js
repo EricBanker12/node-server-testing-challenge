@@ -5,9 +5,10 @@ const usersDB = require('./usersModel')
 
 
 describe('usersModel', () => {
-    beforeEach(() => db('users').truncate())
 
     describe('find', () => {
+
+        beforeEach(() => db('users').truncate())
 
         test('should resolve to an array', () => {
             return usersDB.find()
