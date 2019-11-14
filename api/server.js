@@ -34,4 +34,16 @@ server.post('/api/users', (req, res) => {
         })
 })
 
+server.delete('/api/users/:id', (req, res) => {
+    usersDB.del(req.params.id)
+        .then(resp => {
+            if (resp) res.sendStatus(204)
+            else res.sendStatus(400)
+        })
+        .catch(err => {
+            console.error(err)
+            res.sendStatus(500)
+        })
+})
+
 module.exports = server
