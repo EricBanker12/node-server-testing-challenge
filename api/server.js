@@ -23,4 +23,15 @@ server.get('/api/users', (req, res) => {
         })
 })
 
+server.post('/api/users', (req, res) => {
+    usersDB.add(req.body)
+        .then(resp => {
+            res.status(201).json(resp)
+        })
+        .catch(err => {
+            console.error(err)
+            res.sendStatus(500)
+        })
+})
+
 module.exports = server

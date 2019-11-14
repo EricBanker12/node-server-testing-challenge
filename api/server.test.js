@@ -31,18 +31,18 @@ describe('/API', () => {
         beforeEach(() => db('users').truncate())
         
         test('should receive status 201 Created', () => {
-            return request(server).post('/api/users', {username: 'testing'}).expect(201)
+            return request(server).post('/api/users').send({username: 'testing'}).expect(201)
         })
 
         test('should receive content type json', () => {
-            return request(server).post('/api/users', {username: 'testing'})
+            return request(server).post('/api/users').send({username: 'testing'})
                 .then(resp => {
                     expect(resp.type).toMatch(/json/i)
                 })
         })
 
         test('should receive added user with an id', () => {
-            return request(server).post('/api/users', {username: 'testing'})
+            return request(server).post('/api/users').send({username: 'testing'})
                 .then(resp => {
                     expect(resp.body).toBeDefined()
                     expect(resp.body.username).toBe('testing')
