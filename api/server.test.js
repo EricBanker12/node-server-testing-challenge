@@ -50,4 +50,26 @@ describe('/API', () => {
                 })
         })
     })
+
+    describe('DELETE /users/:id', () => {
+
+        beforeEach(() => db('users').truncate())
+        
+        test('should receive status 204 No Content', async () => {
+            const [id] = await db('users').insert({username: 'testing'})
+
+            return request(server).delete('/api/users/'+id).expect(204)
+        })
+
+        test('should remove the user', async () => {
+            const [id] = await db('users').insert({username: 'testing'})
+
+            await request(server).delete('/api/users/'+id).expect(204)
+
+            const user = await db('users').where({id}).first()
+
+            expect(user).toBe(undefined)
+        })
+        
+    })
 })
