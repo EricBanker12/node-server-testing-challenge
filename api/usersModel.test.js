@@ -42,4 +42,24 @@ describe('usersModel', () => {
         })
 
     })
+
+    describe('add', () => {
+
+        beforeEach(() => db('users').truncate())
+
+        test('should resolve to the added user', () => {
+            return usersDB.add({username: 'testing'})
+                .then(resp => {
+                    expect(resp.username).toBe('testing')
+                })
+        })
+
+        test('should give an id', () => {
+            return usersDB.add({username: 'testing'})
+                .then(resp => {
+                    expect(resp.id).toBeDefined()
+                })
+        })
+
+    })
 })
